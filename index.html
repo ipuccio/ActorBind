@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ActorBind – Memorize Your Lines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────── -->
+  <header class="site-header">
+
+    <a href="#" class="logo">
+      <span class="logo-icon">🎭</span>
+      <span class="logo-text">ActorBind</span>
+    </a>
+
+    <div class="progress-wrap">
+      <span class="progress-label">Scene 3 / 8</span>
+      <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="hearts" aria-label="Lives remaining: 4 of 5">
+      <span class="heart" title="Life">❤️</span>
+      <span class="heart" title="Life">❤️</span>
+      <span class="heart" title="Life">❤️</span>
+      <span class="heart" title="Life">❤️</span>
+      <span class="heart lost" title="Life lost">❤️</span>
+    </div>
+
+  </header>
+
+  <!-- ── Main ────────────────────────────────────────────────── -->
+  <main>
+
+    <!-- Lesson label -->
+    <div class="lesson-info">
+      <span class="lesson-badge">Act II · Hamlet</span>
+      <span class="lesson-title">Scene 3 – The Soliloquy</span>
+    </div>
+
+    <!-- ── Exercise card: arrange the line ─────────────────── -->
+    <section class="card" aria-label="Exercise: arrange the words">
+
+      <!-- Character dialogue prompt -->
+      <div class="card-header">
+        <div class="character-avatar" aria-hidden="true">🎩</div>
+        <div class="character-info">
+          <div class="character-name">Hamlet</div>
+          <div class="dialogue-bubble">
+            To be, or not to be — that is the question…
+          </div>
+        </div>
+      </div>
+
+      <!-- Instruction -->
+      <p class="exercise-instruction">
+        <span class="icon" aria-hidden="true">🧩</span>
+        Arrange the words to complete the next line
+      </p>
+
+      <!-- Drop zone for selected tiles -->
+      <div class="answer-area" role="group" aria-label="Your answer">
+        <span class="answer-placeholder" aria-hidden="true">Tap words to build the line…</span>
+      </div>
+
+      <!-- Word tile bank -->
+      <div class="tiles-bank" role="group" aria-label="Available words">
+        <button class="tile" type="button" aria-pressed="false">Whether</button>
+        <button class="tile" type="button" aria-pressed="false">'tis</button>
+        <button class="tile" type="button" aria-pressed="false">nobler</button>
+        <button class="tile" type="button" aria-pressed="false">in</button>
+        <button class="tile" type="button" aria-pressed="false">the</button>
+        <button class="tile" type="button" aria-pressed="false">mind</button>
+        <button class="tile" type="button" aria-pressed="false">to</button>
+        <button class="tile" type="button" aria-pressed="false">suffer</button>
+        <button class="tile selected" type="button" aria-pressed="true">slings</button>
+        <button class="tile" type="button" aria-pressed="false">arrows</button>
+      </div>
+
+    </section>
+
+    <!-- ── Stats strip ─────────────────────────────────────── -->
+    <div class="stats-strip">
+
+      <div class="stat-card streak">
+        <span class="stat-icon" aria-hidden="true">🔥</span>
+        <div class="stat-body">
+          <span class="stat-value">7</span>
+          <span class="stat-label">Day Streak</span>
+        </div>
+      </div>
+
+      <div class="stat-card xp">
+        <span class="stat-icon" aria-hidden="true">⭐</span>
+        <div class="stat-body">
+          <span class="stat-value">340</span>
+          <span class="stat-label">Total XP</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon" aria-hidden="true">📜</span>
+        <div class="stat-body">
+          <span class="stat-value">12</span>
+          <span class="stat-label">Lines Learned</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Exercise card: multiple choice ──────────────────── -->
+    <section class="card" aria-label="Exercise: choose the correct line">
+
+      <p class="exercise-instruction">
+        <span class="icon" aria-hidden="true">🎯</span>
+        Which line comes next?
+      </p>
+
+      <div class="options-grid" role="group" aria-label="Answer choices">
+        <button class="option-btn" type="button" aria-pressed="false">
+          The slings and arrows of outrageous fortune
+        </button>
+        <button class="option-btn selected" type="button" aria-pressed="true">
+          Or to take arms against a sea of troubles
+        </button>
+        <button class="option-btn" type="button" aria-pressed="false">
+          And by opposing, end them
+        </button>
+        <button class="option-btn" type="button" aria-pressed="false">
+          To die — to sleep, no more
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ── Footer / action bar ─────────────────────────────────── -->
+  <footer class="site-footer">
+    <button class="btn btn-skip" type="button">Skip</button>
+    <button class="btn btn-check" type="button">Check ✓</button>
+  </footer>
+
+</body>
+</html>
