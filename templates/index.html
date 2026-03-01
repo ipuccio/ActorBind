@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ActorBind — Memorize Your Lines</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+    <!-- ════════════ UPLOAD SCREEN ════════════ -->
+    <div class="screen active" id="screen-upload">
+        <div class="upload-container">
+            <div class="brand">
+                <div class="brand-icon">🎭</div>
+                <h1 class="brand-title">ActorBind</h1>
+                <p class="brand-subtitle">Master your lines, own the stage</p>
+            </div>
+            <div class="upload-card" id="drop-zone">
+                <div class="upload-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="12" y1="18" x2="12" y2="12"/>
+                        <polyline points="9 15 12 12 15 15"/>
+                    </svg>
+                </div>
+                <p class="upload-text">Drop your play PDF here</p>
+                <p class="upload-subtext">or click to browse files</p>
+                <input type="file" id="file-input" accept=".pdf" hidden>
+            </div>
+            <div class="upload-status" id="upload-status"></div>
+            <p class="upload-hint">Supports text-based play PDFs with character names in UPPER CASE</p>
+        </div>
+    </div>
+
+    <!-- ════════════ SETUP SCREEN ════════════ -->
+    <div class="screen" id="screen-setup">
+        <div class="setup-container">
+            <button class="btn-back" id="btn-back-upload">← New Upload</button>
+            <h2 class="setup-title">Choose Your Character</h2>
+
+            <div class="play-info" id="play-info">
+                <span class="info-badge" id="badge-pages">0 pages</span>
+                <span class="info-badge" id="badge-lines">0 lines detected</span>
+            </div>
+
+            <div class="character-grid" id="character-grid"></div>
+
+            <div class="page-range-section">
+                <h3 class="section-label">Page Range <span class="optional">(optional)</span></h3>
+                <div class="range-inputs">
+                    <div class="range-field">
+                        <label for="start-page">From</label>
+                        <input type="number" id="start-page" min="1" value="1">
+                    </div>
+                    <span class="range-dash">—</span>
+                    <div class="range-field">
+                        <label for="end-page">To</label>
+                        <input type="number" id="end-page" min="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-section" id="preview-section">
+                <h3 class="section-label">Script Preview</h3>
+                <div class="preview-lines" id="preview-lines"></div>
+            </div>
+
+            <div class="setup-actions">
+                <button class="btn-primary" id="btn-study" disabled>
+                    <span class="btn-icon">📖</span> Study Lines
+                </button>
+                <button class="btn-primary btn-gold" id="btn-start" disabled>
+                    <span class="btn-icon">⚡</span> Start Practice
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════ STUDY SCREEN ════════════ -->
+    <div class="screen" id="screen-study">
+        <div class="study-container">
+            <div class="study-header">
+                <button class="btn-back" id="btn-study-back">← Back</button>
+                <h2 class="study-title">Study Your Lines</h2>
+                <p class="study-subtitle" id="study-subtitle"></p>
+            </div>
+            <div class="study-lines" id="study-lines"></div>
+            <div class="study-footer">
+                <button class="btn-primary btn-gold" id="btn-start-from-study">
+                    <span class="btn-icon">⚡</span> Ready to Practice
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════ PRACTICE SCREEN ════════════ -->
+    <div class="screen" id="screen-practice">
+        <div class="practice-header">
+            <button class="btn-icon-only" id="btn-quit" title="Quit">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="practice-stats">
+                <div class="stat stat-hearts" id="hearts-display">
+                    <span class="stat-icon">❤️</span>
+                    <span class="stat-value" id="heart-count">3</span>
+                </div>
+                <div class="stat stat-xp">
+                    <span class="stat-icon">⭐</span>
+                    <span class="stat-value" id="xp-count">0</span>
+                </div>
+                <div class="stat stat-streak" id="streak-display">
+                    <span class="stat-icon">🔥</span>
+                    <span class="stat-value" id="streak-count">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-area">
+            <div class="exercise-type-badge" id="exercise-type-badge"></div>
+            <div class="exercise-container" id="exercise-container"></div>
+        </div>
+
+        <div class="practice-footer" id="practice-footer">
+            <div class="feedback-bar" id="feedback-bar"></div>
+            <button class="btn-primary btn-check" id="btn-check" disabled>Check</button>
+        </div>
+    </div>
+
+    <!-- ════════════ RESULTS SCREEN ════════════ -->
+    <div class="screen" id="screen-results">
+        <div class="results-container">
+            <div class="results-trophy">🏆</div>
+            <h2 class="results-title" id="results-title">Lesson Complete!</h2>
+            <p class="results-subtitle" id="results-subtitle"></p>
+
+            <div class="results-stats">
+                <div class="result-card">
+                    <span class="result-number" id="result-xp">0</span>
+                    <span class="result-label">XP earned</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-number" id="result-accuracy">0%</span>
+                    <span class="result-label">Accuracy</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-number" id="result-streak">0</span>
+                    <span class="result-label">Best streak</span>
+                </div>
+            </div>
+
+            <div class="results-actions">
+                <button class="btn-primary btn-gold" id="btn-next-lesson">Next Lesson →</button>
+                <button class="btn-secondary" id="btn-retry-mistakes">Practice Mistakes</button>
+                <button class="btn-secondary" id="btn-retry">Retry Lesson</button>
+                <button class="btn-ghost" id="btn-new-play">← Choose Another Play</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════ OUT OF HEARTS OVERLAY ════════════ -->
+    <div class="overlay" id="overlay-hearts">
+        <div class="overlay-card">
+            <div class="overlay-icon">💔</div>
+            <h3>Out of Hearts!</h3>
+            <p>Don't worry — every great actor needs rehearsal.</p>
+            <div class="overlay-actions">
+                <button class="btn-primary" id="btn-hearts-retry">Try Again</button>
+                <button class="btn-secondary" id="btn-hearts-quit">Back to Setup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════ LOADING OVERLAY ════════════ -->
+    <div class="overlay" id="overlay-loading">
+        <div class="overlay-card">
+            <div class="spinner"></div>
+            <p class="loading-text" id="loading-text">Preparing your practice…</p>
+        </div>
+    </div>
+
+</div>
+
+<canvas id="confetti-canvas"></canvas>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
